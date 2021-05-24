@@ -1,29 +1,40 @@
 <html>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js'></script><!-- 2019-01-25 https://cdnjs.com/libraries/vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <body>
 
-<div id="vue_example"></div>
+    <div id="vue_example"></div>
 
-<script>
-var vue_example = new Vue({
-  el: '#vue_example',
+    <script>
+        var vue_example = new Vue({
+            el: '#vue_example',
 
-  template: `<div>
-    <p>{{ message }}</p>
+            template: `<div>
+            <p>なんでも暴言を吐こう!</p>
     <input v-model="message" />
-    <button v-on:click="reverse()">Reverse</button>
+    <p>お前：「{{ message }}」
+    <button v-on:click="check_tweet()">Check</button></p>
+    <p v-show="show">ツイート内容「{{ check_message }}」
+    <button v-on:click="go_tweet()">Tweet</button></p>
+
     </div>`,
+            data: {
+                message: '',
+                check_message: '',
+            },
 
-  data: {
-    message: 'Hello Vue.js!',
-  },
-
-  methods: {
-    reverse: function () {
-      this.message = this.message.split('').reverse().join('')
-    },
-  },
-})
-</script>
+            methods: {
+                check_tweet: function () {
+                    this.check_message = 'にゃーん'
+                    this.show = true
+                },
+                go_tweet: function () {
+                    var shareURL = 'https://twitter.com/intent/tweet?text=' + this.check_message
+                    window.open(shareURL, '_blank')
+                },
+            },
+        })
+    </script>
 </body>
+
 </html>
